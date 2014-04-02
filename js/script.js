@@ -1,15 +1,10 @@
-function show(href, scroll)
+function show(hash)
 {
-    scroll = scroll || false;
-    var  num = href.replace('#','')
+    var  num = hash.replace('#','')
         ,$a = $("ul").find('a').filter('[href=#'+num+']')
         ,pattern = /\r\n|\r|\n/g;
-
     $a.addClass('open');
-    if (scroll)
-    {
-        $a.scrollTo();
-    }
+    $a.scrollTo();
     $.ajax({
          url: "data/"+num+".txt"
         ,dataType: "text"
@@ -39,8 +34,7 @@ $(function() {
     var hash = location.hash;
     if (hash)
     {
-        show(hash, scroll);
+        show(hash);
     }
-
 });
 //console.log(); всегда рядом
