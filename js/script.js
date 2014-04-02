@@ -1,17 +1,16 @@
 function show(href)
 {
-    var url = href.replace('#','');
-    if (url)
+    var num = href.replace('#','');
+    if (num)
     {
-        var $a = $("ul").find('a').filter('[href="'+url+'"]')
+        var $a = $("ul").find('a').filter('[href=#'+num+']')
             ,pattern = /\r\n|\r|\n/g;
         $a.addClass('open');
         $.ajax({
-             url: url
+             url: "data/"+num+".txt"
             ,dataType: "text"
             ,cache: false
         }).done(function( text ) {
-            location.hash = url;
             var arr = text.split(pattern),
                 title = arr[0];
             arr.splice(0, 2);
@@ -27,9 +26,12 @@ $('ul').find('a').on('click', function() {
     } else {
         show($a.attr('href'));
     }
-    return false;
 });
 $(function() {
+    $('ul').find('a').each(function() {
+        var href = $(this).attr( "href" );
+        $(this).attr( "href", href.replace('data/','#').replace('.txt',''));
+    });
     show(location.hash);
 });
 //console.log(); всегда держи его при себе
