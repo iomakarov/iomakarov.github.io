@@ -1,22 +1,26 @@
-function show(href)
+function show(href, scroll)
 {
-    var num = href.replace('#','');
-    if (num)
+    scroll = scroll || false;
+    var  num = href.replace('#','')
+        ,$a = $("ul").find('a').filter('[href=#'+num+']')
+        ,pattern = /\r\n|\r|\n/g;
+
+    $a.addClass('open');
+    if (scroll)
     {
-        var $a = $("ul").find('a').filter('[href=#'+num+']')
-            ,pattern = /\r\n|\r|\n/g;
-        $a.addClass('open');
-        $.ajax({
-             url: "data/"+num+".txt"
-            ,dataType: "text"
-            ,cache: false
-        }).done(function( text ) {
-            var arr = text.split(pattern),
-                title = arr[0];
-            arr.splice(0, 2);
-            $('<p>'+ arr.join('<br>')+'<br></p>').insertAfter($a);
-        });
+        $a.scrollTo();
     }
+    $.ajax({
+         url: "data/"+num+".txt"
+        ,dataType: "text"
+        ,cache: false
+    }).done(function( text ) {
+        var  arr = text.split(pattern)
+            ,title = arr[0];
+        arr.splice(0, 2);
+        $('<p>'+ arr.join('<br>')+'<br></p>').insertAfter($a);
+    });
+
 }
 $('ul').find('a').on('click', function() {
     $a = $(this);
@@ -32,6 +36,11 @@ $(function() {
         var href = $(this).attr( "href" );
         $(this).attr( "href", href.replace('data/','#').replace('.txt',''));
     });
-    show(location.hash);
+    var hash = location.hash;
+    if (hash)
+    {
+        show(hash, scroll);
+    }
+
 });
-//console.log(); всегда держи его при себе
+//console.log(); всегда рядом
