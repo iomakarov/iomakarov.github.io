@@ -1,16 +1,17 @@
 function show(href)
 {
-    var num = href.replace('#','');
-    if (num)
+    var url = href.replace('#','');
+    if (url)
     {
-        var $a = $("ul").find('a').filter('[href=#'+num+']')
+        var $a = $("ul").find('a').filter('[href="'+url+'"]')
             ,pattern = /\r\n|\r|\n/g;
         $a.addClass('open');
         $.ajax({
-             url: "data/"+num+".txt"
+             url: url
             ,dataType: "text"
             ,cache: false
         }).done(function( text ) {
+            location.hash = url;
             var arr = text.split(pattern),
                 title = arr[0];
             arr.splice(0, 2);
@@ -26,6 +27,7 @@ $('ul').find('a').on('click', function() {
     } else {
         show($a.attr('href'));
     }
+    return false;
 });
 $(function() {
     show(location.hash);
