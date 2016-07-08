@@ -1,0 +1,64 @@
+.fl
+{
+float:left;
+}
+
+.fr
+{
+float: right;
+}
+.clear { clear: both; line-height: 0px !important; font-size: 0px !important; height: 0 !important }
+
+.duration 
+{
+    font-size:10px;
+    color:#777;
+}
+
+.drplayer-btn.play 
+{
+    width:16px;
+    height:17px;
+    background-image: url(img/play.gif);
+    display: inline-block;
+}
+
+.drplayer-btn.pause
+{
+    width:16px;
+    height:17px;
+    background-image: url(img/pause.gif?2);
+}
+
+.drplayer-btn.paused
+{
+    width:16px;
+    height:17px;
+    background-image: url(img/play.gif?3);
+    display: inline-block;
+}
+
+
+div.player 
+{
+    width:380px;
+    padding-left:20px;
+}
+
+div.player.inactive
+{
+    margin-bottom:0px;
+}
+
+.item .title 
+{
+    -vertical-align:middle;
+}
+
+.item .drplayer-btn 
+{
+    display:inline;
+    float:left; 
+    margin-right:5px;
+    cursor:pointer;
+}

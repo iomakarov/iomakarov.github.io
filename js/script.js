@@ -17,7 +17,7 @@ function show(hash)
     });
 
 }
-$('ul').find('a').on('click', function() {
+$('ul.poetry').find('a').on('click', function() {
     $a = $(this);
     if ($a.hasClass('open')){
         $a.removeClass('open');

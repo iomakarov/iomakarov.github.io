@@ -1,0 +1,22 @@
+form {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+    background-color: transparent;
+    color:#36342e;
+    font-size:18px;
+}
+#main {
+    position: relative;
+	text-align:center;
+	top:100px;
+	left:-60px;
+	margin: 0 auto;
+}
+#main img {
+	position: absolute;
+}
+

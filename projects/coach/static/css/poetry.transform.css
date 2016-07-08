@@ -1,0 +1,83 @@
+#poetry-transform {
+	position: relative;
+	margin:0 auto;	
+	font-size:30px;
+	cursor:pointer;
+	font-family: Times New Roman;
+	line-height:normal;
+}
+#poetry-transform span {  
+	position: absolute;
+}
+#poetry-transform span.tmove,span.tmove1,span.tmove2,span.tmove3,span.tmove4,span.tmove_1,span.tmove_2,span.tmove_3,span.tmove_4,span.thide,span.tchk {
+	-webkit-transition: all 1s ease-in;
+	-moz-transition: all 1s ease-in;
+	-o-transition: all 1s ease-in;
+	-ms-transition: all 1s ease-in;
+}
+		
+#poetry-transform:hover span.thide{
+	opacity: 0;
+}
+#poetry-transform span.tchk{
+	opacity: 0;
+}		
+#poetry-transform:hover span.tchk{
+	opacity: 1;
+}		
+
+#poetry-transform:hover span.tmove  {
+	-webkit-transform: rotate(13deg);
+	-moz-transform: rotate(13deg);
+	-o-transform: rotate(13deg);
+	-ms-transform: rotate(13deg);
+}
+
+#poetry-transform:hover span.tmove1  {
+	-webkit-transform: rotate(13deg) translateX(-10px) translateY(-9px);
+	-moz-transform:  rotate(13deg) translateX(-10px) translateY(-9px);
+	-o-transform:  rotate(13deg) translateX(-10px) translateY(-9px);
+	-ms-transform:  rotate(13deg) translateX(-10px) translateY(-9px);
+}	
+#poetry-transform:hover span.tmove2  {
+	-webkit-transform: rotate(13deg) translateX(-15px) translateY(-12px);
+	-moz-transform: rotate(13deg) translateX(-15px) translateY(-12px);
+	-o-transform: rotate(13deg) translateX(-15px) translateY(-12px);
+	-ms-transform: rotate(13deg) translateX(-15px) translateY(-12px);
+}
+#poetry-transform:hover span.tmove3  {
+	-webkit-transform: rotate(13deg) translateX(-73px) translateY(-4px);
+	-moz-transform: rotate(13deg) translateX(-73px) translateY(-4px);
+	-o-transform: rotate(13deg) translateX(-73px) translateY(-4px);
+	-ms-transform: rotate(13deg) translateX(-73px) translateY(-4px);
+}	
+#poetry-transform:hover span.tmove4  {
+	-webkit-transform: rotate(13deg) translateX(-5px) translateY(-4px);
+	-moz-transform: rotate(13deg) translateX(-5px) translateY(-4px);
+	-o-transform: rotate(13deg) translateX(-5px) translateY(-4px);
+	-ms-transform: rotate(13deg) translateX(-5px) translateY(-4px);
+}
+#poetry-transform:hover span.tmove_1  {
+	-webkit-transform: rotate(13deg) translateY(-7px);
+	-moz-transform: rotate(13deg) translateY(-7px);
+	-o-transform: rotate(13deg) translateY(-7px);
+	-ms-transform: rotate(13deg) translateY(-7px);
+}	
+#poetry-transform:hover span.tmove_2  {
+	-webkit-transform: rotate(13deg) translateY(-7px);
+	-moz-transform: rotate(13deg) translateY(-7px);
+	-o-transform: rotate(13deg) translateY(-7px);
+	-ms-transform: rotate(13deg) translateY(-7px);
+}
+#poetry-transform:hover span.tmove_3  {
+	-webkit-transform: rotate(13deg) translateY(-9px);
+	-moz-transform: rotate(13deg) translateY(-9px);
+	-o-transform: rotate(13deg) translateY(-9px);
+	-ms-transform: rotate(13deg) translateY(-9px);
+}	
+#poetry-transform:hover span.tmove_4  {
+	-webkit-transform: rotate(13deg) translateY(-3px);
+	-moz-transform: rotate(13deg) translateY(-3px);
+	-o-transform: rotate(13deg) translateY(-3px);
+	-ms-transform: rotate(13deg) translateY(-3px);
+}

@@ -1,0 +1,25 @@
+body {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+#craft {
+    position: absolute;
+	text-align:center;
+	height:100%;
+	width:100%;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+    top: 0;
+    left:0;
+    background-color:transparent;
+    background-repeat: no-repeat;
+}
+
+canvas {
+	position: absolute;
+	top:0px;
+	left:0px;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
