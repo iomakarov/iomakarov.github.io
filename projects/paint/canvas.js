@@ -25,47 +25,50 @@ function prepareCanvas()
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight-5);
 	canvas.setAttribute('id', 'canvas');
-
-	canvasDiv.appendChild(canvas);
 	context = canvas.getContext("2d"); 
 
 
-    // history
+    // history - save after drow
 
     var history = {
         redo_list: [],
         undo_list: [],
-        saveState: function(canvas, list, keep_redo) {
-            keep_redo = keep_redo || false;
-            if(!keep_redo) {
-                this.redo_list = [];
+        now_canvas: null,
+        saveState: function(canvas) {
+            this.redo_list = [];
+            if (this.now_canvas){
+                this.undo_list.push(this.now_canvas);
             }
-            (list || this.undo_list).push(canvas.toDataURL());   
+            this.now_canvas = canvas.toDataURL(); 
         },
         undo: function(canvas, ctx) {
-            this.restoreState(canvas, ctx, this.undo_list, this.redo_list);
+            this.restore(canvas, ctx, this.undo_list, this.redo_list);
         },
         redo: function(canvas, ctx) {
-            this.restoreState(canvas, ctx, this.redo_list, this.undo_list);
+            this.restore(canvas, ctx, this.redo_list, this.undo_list);
         },
-        restoreState: function(canvas, ctx,  pop, push) {
-            if(pop.length) {
-                this.saveState(canvas, push, true);
-                var restore_state = pop.pop();
-                var img = new Image();
-                img.src = restore_state;
-                img.onload = function() {
-                    clear();
-                    ctx.drawImage(img, 0, 0);  
-                }
+        restore: function(canvas, ctx, pop, push){
+            if (pop.length) {
+                push.push(canvas.toDataURL()); 
+                restore_state = pop.pop();
+                this.restoreImage(canvas, ctx, restore_state);
+            }
+        },
+        restoreImage: function(canvas, ctx, restore_state){
+            var img = new Image();
+            img.src = restore_state;
+            img.onload = function() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                history.now_canvas = canvas.toDataURL(); 
             }
         },
         clear: function() {
             this.redo_list = [];
             this.undo_list = [];
+            now_canvas = null;
         }
     }
-
 
     // Settings event
 
@@ -124,12 +127,12 @@ function prepareCanvas()
         paintFalse();
     }, false);
     canvas.addEventListener('touchstart', function(e) {
-        history.saveState(canvas);
+        
     }, false);
 
 	canvas.onmousedown = function(e){
 		paint = true;
-        history.saveState(canvas);
+        
 	};
 
 	canvas.onmousemove = function(e){
@@ -143,7 +146,7 @@ function prepareCanvas()
 	};
 
     function paintFalse(){
-        
+        history.saveState(canvas);
         paint = false;
         xMinus = null;
         yMinus = null;
@@ -159,6 +162,7 @@ function prepareCanvas()
     
     function clear(){
         context.clearRect(0, 0, canvas.width, canvas.height);
+        history.saveState(canvas);
     }   
 
     function drowSpeed(x, y){
@@ -259,14 +263,13 @@ function prepareCanvas()
                 dym1 = dy;
             }
         }
-
+        context.fillStyle = color;
+        context.strokeStyle = color;
         context.beginPath();
         context.moveTo(xm1-dxm1,ym1+dym1);
         context.quadraticCurveTo(xm-dxm, ym+dym,x-dx, y+dy);
         context.lineTo(x+dx, y-dy);
         context.quadraticCurveTo(xm+dxm, ym-dym,xm1+dxm1,ym1-dym1);
-        context.fillStyle = color;
-        context.strokeStyle = color;
         context.fill();
         context.stroke();
         dxm1 = dxm;
@@ -288,7 +291,7 @@ function prepareCanvas()
     }
 
 
-
+    clear();
     /*
     canvas.onmouseleave = function(e){
         paint = false;
