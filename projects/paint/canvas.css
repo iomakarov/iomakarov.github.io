@@ -1,9 +1,11 @@
-body, div, fieldset, input, label, a {
+body, div, fieldset, input, label, a, canvas {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;   
     top:0;
     left:0;
+    right:0;
+    bottom:0;
     padding:0;
     margin:0;
 }
@@ -14,6 +16,7 @@ body, div, fieldset, input, label, a {
 }
 #canvas {
     position: relative;
+    width:100%;
 }
 
 .header-buttons {
@@ -23,6 +26,15 @@ body, div, fieldset, input, label, a {
 }
 .header-buttons div{
     position: relative;
+}
+.one {
+ z-index: 100;
+}
+.header-buttons-h{
+    float: left;
+    clear: none;
+    height: 30px;
+    display: hidden;
 }
 .header-buttons-v{
     position: absolute;
@@ -40,6 +52,7 @@ body, div, fieldset, input, label, a {
 
 .header-buttons span.color-white {
     width: 29px;
+    height: 28px;
     border-top: 1px solid black;
     border-right: 1px solid black;
     border-bottom: 1px solid black;
@@ -50,7 +63,7 @@ div.header-buttons-h span.checked {
 div.header-buttons-v span.checked {
     width: 60px; 
 }
-.header-buttons span.clear, span.brush, span.save, a  {
+.header-buttons span.clear, span.brush, span.save, span.undo, span.redo, a  {
     line-height:30px;
     width: 70px; 
     vertical-align: middle;

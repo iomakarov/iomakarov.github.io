@@ -1,6 +1,5 @@
-var paddingCanvas = 40;
 var canvasWidth = window.innerWidth;
-var canvasHeight = window.innerHeight-paddingCanvas;
+var canvasHeight = window.innerHeight;
 var paint = false;
 var context;
 var xMinus = null;
@@ -13,6 +12,7 @@ var dxm, dym = null;
 var dxm1, dym1 = null;
 var brush = 'classic';
 var color = 'black';
+
 function prepareCanvas()
 {
     var canvasDiv = document.getElementById('paint');
@@ -23,11 +23,49 @@ function prepareCanvas()
 
 	canvas = document.getElementById('canvas');
 	canvas.setAttribute('width', canvasWidth);
-	canvas.setAttribute('height', canvasHeight);
+	canvas.setAttribute('height', canvasHeight-5);
 	canvas.setAttribute('id', 'canvas');
 
 	canvasDiv.appendChild(canvas);
 	context = canvas.getContext("2d"); 
+
+
+    // history
+
+    var history = {
+        redo_list: [],
+        undo_list: [],
+        saveState: function(canvas, list, keep_redo) {
+            keep_redo = keep_redo || false;
+            if(!keep_redo) {
+                this.redo_list = [];
+            }
+            (list || this.undo_list).push(canvas.toDataURL());   
+        },
+        undo: function(canvas, ctx) {
+            this.restoreState(canvas, ctx, this.undo_list, this.redo_list);
+        },
+        redo: function(canvas, ctx) {
+            this.restoreState(canvas, ctx, this.redo_list, this.undo_list);
+        },
+        restoreState: function(canvas, ctx,  pop, push) {
+            if(pop.length) {
+                this.saveState(canvas, push, true);
+                var restore_state = pop.pop();
+                var img = new Image();
+                img.src = restore_state;
+                img.onload = function() {
+                    clear();
+                    ctx.drawImage(img, 0, 0);  
+                }
+            }
+        },
+        clear: function() {
+            this.redo_list = [];
+            this.undo_list = [];
+        }
+    }
+
 
     // Settings event
 
@@ -45,7 +83,14 @@ function prepareCanvas()
     });
 
     $("span.clear").click( function(){
+        history.clear();
         clear();
+    });
+    $("span.undo").click( function(){
+         history.undo(canvas, context);
+    });
+    $("span.redo").click( function(){
+         history.redo(canvas, context);
     });
     
 
@@ -66,7 +111,11 @@ function prepareCanvas()
         var mouseX = touch.pageX - this.offsetLeft;
 		var mouseY = touch.pageY - this.offsetTop;
         if (e.targetTouches.length == 1) {
-            paint = true;
+            if (paint==false) {
+                paint = true;
+                
+            }
+            
             drowSpeed(mouseX, mouseY);
         }
     }, false);
@@ -74,9 +123,13 @@ function prepareCanvas()
     canvas.addEventListener('touchend', function(e) {
         paintFalse();
     }, false);
+    canvas.addEventListener('touchstart', function(e) {
+        history.saveState(canvas);
+    }, false);
 
 	canvas.onmousedown = function(e){
 		paint = true;
+        history.saveState(canvas);
 	};
 
 	canvas.onmousemove = function(e){
@@ -90,6 +143,7 @@ function prepareCanvas()
 	};
 
     function paintFalse(){
+        
         paint = false;
         xMinus = null;
         yMinus = null;
@@ -247,4 +301,3 @@ function prepareCanvas()
     }, false);
     */
 }
-
