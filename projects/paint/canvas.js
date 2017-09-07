@@ -123,8 +123,13 @@ function prepareCanvas()
                     yc = yMinus + yr/2;
                     l = sqrt(pow(xr,2) + pow(yr,2));
                     v = l/(tNow-tMinus);
+                    
                     if (vMinus !== null){
+                        if (v > vMinus*2){
+                            v = vMinus*2;
+                        }
                         a = (v-vMinus)/(tNow-tMinus);
+                        
                         if (brush=='classic') {
                             drowClassic(xc, yc, l, xr, yr, v-a*10, x, y,xMinus,yMinus,xMinus1,yMinus1);
                         }
