@@ -1,0 +1,46 @@
+body, div, fieldset, input, label {
+    top:0;
+    left:0;
+    padding:0;
+    margin:0;
+}
+#canvasDiv {
+    position:fixed; 
+    width:100%;
+    height:100%; 
+}
+fieldset {
+    margin:5px;
+    padding: 10px;
+    height: 35px; 
+    border: 1px solid black;
+    overflow: hidden;
+    float: left;
+    clear: none;
+}
+
+label {
+    float: left;
+    clear: none;
+    padding: 0 5px 0 5px;
+}
+
+input[type=radio],
+input.radio {
+    float: left;
+    clear: none;
+    margin: 2px 0 0 2px;
+}  
+.square { 
+    width: 18px; 
+    height: 18px; 
+    border:1px solid grey;
+}
+.header-buttons {
+    height: 60px; 
+    overflow: hidden;
+}
+input[type=button] {
+    margin: 12px;
+    padding: 10px;
+}
