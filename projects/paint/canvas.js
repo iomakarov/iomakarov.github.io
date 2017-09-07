@@ -1,4 +1,4 @@
-var paddingCanvas = 60;
+var paddingCanvas = 40;
 var canvasWidth = window.innerWidth;
 var canvasHeight = window.innerHeight-paddingCanvas;
 var paint = false;
@@ -15,15 +15,13 @@ var brush = 'classic';
 var color = 'black';
 function prepareCanvas()
 {
-    var canvasDiv = document.getElementById('canvasDiv');
+    var canvasDiv = document.getElementById('paint');
     canvasDiv.addEventListener('touchmove', function(event) {
         event.preventDefault();
         touches = event.touches;
     }, false); 
 
-	canvas = document.createElement('canvas');
-    canvas.style.position = 'relative';
-    canvas.style.borderTop = '1px solid black';
+	canvas = document.getElementById('canvas');
 	canvas.setAttribute('width', canvasWidth);
 	canvas.setAttribute('height', canvasHeight);
 	canvas.setAttribute('id', 'canvas');
@@ -32,22 +30,32 @@ function prepareCanvas()
 	context = canvas.getContext("2d"); 
 
     // Settings event
-    $("input[name=brush]").click( function(){
-        if( $(this).is(':checked') ) {
-            brush = this.value;
-        } 
+
+
+    $("span.brush").click( function(){
+        brush = $(this).data('brush');
+        $("span.brush").removeClass('checked');
+        $(this).addClass('checked');
     });
 
-    $("input[name=color]").click( function(){
-        if( $(this).is(':checked') ) {
-            color = this.value;
-        } 
+    $("span.color").click( function(){
+        color = $(this).data('color');
+        $("span.color").removeClass('checked');
+        $(this).addClass('checked');
     });
 
-    $("input[name=clear]").click( function(){
+    $("span.clear").click( function(){
         clear();
     });
+    
 
+    function download() {
+        var dt = canvas.toDataURL();
+        var d = new Date();
+        this.download = 'Feeling_Speed_Brush-'+d.getTime()+'.png';
+        this.href = dt; 
+    }
+    document.getElementById('save-button').addEventListener('click', download, false);
 
 	// Add mouse events
 	// ----------------
@@ -120,12 +128,15 @@ function prepareCanvas()
                         if (brush=='classic') {
                             drowClassic(xc, yc, l, xr, yr, v-a*10, x, y,xMinus,yMinus,xMinus1,yMinus1);
                         }
-                        
+                        if (brush=='eraser' || brush=='water') {
+                            drowEraser(xc, yc, l, xr, yr, v-a*10, x, y,xMinus,yMinus,xMinus1,yMinus1);
+                        }
                     } 
                     vMinus = v;
                     xMinus1 = xMinus;
                     yMinus1 = yMinus;
                 }
+
                 if (brush=='pank') {
                     drowPank(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus);
                 }
@@ -139,7 +150,43 @@ function prepareCanvas()
         }
     }
 
-   
+    function drowEraser(xc, yc, l, xr, yr, v, x, y,xm,ym,xm1,ym1){
+        var m = 20;
+        var dx = v/(2*l)*yr*m;
+        var dy = v/(2*l)*xr*m;
+        if (dxm == null) {
+            dxm = dx;
+            dym = dy;
+            if (dxm1 == null) {
+                dxm1 = dx;
+                dym1 = dy;
+            }
+        }
+
+        context.fillStyle = color;
+        context.strokeStyle = color;
+        if (brush=='eraser') {
+            context.fillStyle = 'white';
+            context.strokeStyle = 'white';
+        }
+        context.beginPath();
+        context.arc(x,y,Math.abs(v*m/2),0,2*Math.PI);
+        context.fill();
+        context.stroke();
+
+        context.beginPath();
+        context.moveTo(xm1-dxm1,ym1+dym1);
+        context.quadraticCurveTo(xm-dxm, ym+dym,x-dx, y+dy);
+        context.lineTo(x+dx, y-dy);
+        context.quadraticCurveTo(xm+dxm, ym-dym,xm1+dxm1,ym1-dym1);
+        context.fill();
+        context.stroke();
+
+        dxm1 = dxm;
+        dym1 = dym;
+        dxm = dx;
+        dym = dy;
+    }
 
     function drowClassic(xc, yc, l, xr, yr, v, x, y,xm,ym,xm1,ym1){
         var m = 3;

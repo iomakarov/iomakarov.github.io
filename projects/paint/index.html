@@ -4,56 +4,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Feeling speed brush</title>
     <link rel="stylesheet" type="text/css" href="./canvas.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script type="text/javascript" src="./canvas.js"></script>
   </head>
   <body>
-    <div id="canvasDiv">
-      <div class="header-buttons">
-        <fieldset>
-          <legend>Brush</legend>
-          <input id="brush_classic" name="brush" type="radio" value="classic" checked="checked">
-          <label for="brush_classic">Classic</label>
-          <input id="brush_pank" name="brush" type="radio" value="pank" >
-          <label for="brush_pank">Pank</label>
-        </fieldset>
-        <fieldset>
-          <legend>Color</legend>
-          <input id="color_black" name="color" type="radio" value="black" checked="checked">
-          <label for="color_black"><div class="square" style="background:black;"></div></label>
+    <div id="paint">
+      <div class="header-buttons" id="header-buttons">
+        <div class="header-buttons-h">
+          <a href="#" download="CanvasDemo.png" id="save-button" ><span class="save"  style="background:green;">save</span></a>      
+             
+          <span class="brush checked" data-brush="classic" style="background:black; ">classic</span>   
+          <span class="brush" data-brush="pank" style="background:black;">pank</span>     
+          <span class="brush" data-brush="water" style="background:black;">water</span>    
+          <span class="brush" data-brush="eraser" style="background:grey;">eraser</span> 
+          <span class="clear" style="background:red ;">clear</span>
+        </div>
+        <div class="header-buttons-v">
+          <span class="color checked" data-color="black" style="background:black;"></span>
+          <span class="color" data-color="red" style="background:red;"></span>
+          <span class="color" data-color="orange" style="background:orange;"></span>
+          <span class="color" data-color="yellow" style="background:yellow;"></span>
+          <span class="color" data-color="green" style="background:green;"></span>        
+          <span class="color" data-color="dodgerblue" style="background:dodgerblue;"></span>      
+          <span class="color" data-color="blue" style="background:blue;"></span>  
+          <span class="color" data-color="indigo" style="background:indigo;"></span>
+          <span class="color" data-color="grey" style="background:grey; "></span>   
+          <span class="color color-white" data-color="white" style="background:white; "></span> 
+        </div>
 
-          <input id="color_red" name="color" type="radio" value="red" >
-          <label for="color_red"><div class="square" style="background:red;"></div></label>
-          
-          <input id="color_orange" name="color" type="radio" value="orange" >
-          <label for="color_orange"><div class="square" style="background:orange;"></div></label>
-                    
-          <input id="color_yellow" name="color" type="radio" value="yellow" >
-          <label for="color_yellow"><div class="square" style="background:yellow;"></div></label>
-                    
-          <input id="color_green" name="color" type="radio" value="green" >
-          <label for="color_green"><div class="square" style="background:green;"></div></label>
-                    
-          <input id="color_dodgerblue" name="color" type="radio" value="dodgerblue" >
-          <label for="color_dodgerblue"><div class="square" style="background:dodgerblue;"></div></label>
-                    
-          <input id="color_blue" name="color" type="radio" value="blue" >
-          <label for="color_blue"><div class="square" style="background:blue;"></div></label>
-                              
-          <input id="color_indigo" name="color" type="radio" value="indigo" >
-          <label for="color_indigo"><div class="square" style="background:indigo;"></div></label>
-
-          <input id="color_white" name="color" type="radio" value="white" >
-          <label for="color_white"><div class="square" style="background:white; "></div></label> 
-
-          <input id="color_grey" name="color" type="radio" value="grey" >
-          <label for="color_grey"><div class="square" style="background:grey; "></div></label>                       
-        </fieldset>
-        
-        <input type="button" name="clear" value="Clear">
-        <span>Faster - Larger<span/>
       </div>
-
+      <canvas id="canvas"></canvas>
     </div>
     
 
