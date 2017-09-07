@@ -137,8 +137,8 @@ function prepareCanvas()
                     yMinus1 = yMinus;
                 }
 
-                if (brush=='pank') {
-                    drowPank(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus);
+                if (brush=='punk') {
+                    drowPunk(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus);
                 }
               
             }
@@ -216,7 +216,7 @@ function prepareCanvas()
         dym = dy;
     }
 
-    function drowPank(xc, yc, l, xr, yr, v, x, y,xm,ym){
+    function drowPunk(xc, yc, l, xr, yr, v, x, y,xm,ym){
         var m = 100
         var dx = v/(2*l)*yr*m;
         var dy = v/(2*l)*xr*m;
