@@ -6,8 +6,10 @@ var xMinus = null;
 var yMinus = null;
 var xMinus1 = null;
 var yMinus1 = null;
+
 var tMinus = null;
 var vMinus = null;
+var first = true;
 var dxm, dym = null;
 var dxm1, dym1 = null;
 var brush = 'classic';
@@ -66,7 +68,7 @@ function prepareCanvas()
         clear: function() {
             this.redo_list = [];
             this.undo_list = [];
-            now_canvas = null;
+            this.now_canvas = null;
         }
     }
 
@@ -158,6 +160,7 @@ function prepareCanvas()
         dym = null;
         dxm1 = null;
         dym1 = null;
+        first = true;
     }    
     
     function clear(){
@@ -181,29 +184,31 @@ function prepareCanvas()
                     yc = yMinus + yr/2;
                     l = sqrt(pow(xr,2) + pow(yr,2));
                     v = l/(tNow-tMinus);
-                    
+                   
                     if (vMinus !== null){
+                        v = (v+vMinus)/2;
+                        
                         if (v > vMinus*2){
                             v = vMinus*2;
                         }
-                        a = (v-vMinus)/(tNow-tMinus);
-                        
                         if (brush=='classic') {
-                            drowClassic(xc, yc, l, xr, yr, v-a*10, x, y,xMinus,yMinus,xMinus1,yMinus1);
+                            drowClassic(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus,xMinus1,yMinus1);
                         }
-                        if (brush=='eraser' || brush=='water') {
-                            drowEraser(xc, yc, l, xr, yr, v-a*10, x, y,xMinus,yMinus,xMinus1,yMinus1);
+                        if (brush=='eraser' || brush=='water' || brush=='tube' || brush=='palm') {
+                            drowEraser(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus,xMinus1,yMinus1);
+                        }
+                        if (brush=='punk') {
+                            drowPunk(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus);
+                        }
+                        if (first){
+                            first = false;
                         }
                     } 
                     vMinus = v;
                     xMinus1 = xMinus;
                     yMinus1 = yMinus;
+                    
                 }
-
-                if (brush=='punk') {
-                    drowPunk(xc, yc, l, xr, yr, v, x, y,xMinus,yMinus);
-                }
-              
             }
 
             xMinus = x;
@@ -232,8 +237,30 @@ function prepareCanvas()
             context.fillStyle = 'white';
             context.strokeStyle = 'white';
         }
+
+        if (brush=='tube') {
+            context.fillStyle = color;
+            context.strokeStyle = 'white';
+        }
+
+        if (brush=='palm') {
+            context.fillStyle = 'white';
+            context.strokeStyle = color;
+        }
+
+        if (first){
+            context.beginPath();
+            context.arc(xm1,ym1,Math.abs(v*m/2),0,2*Math.PI);
+            context.fill();
+            context.stroke();
+        }
+
+        
         context.beginPath();
-        context.arc(x,y,Math.abs(v*m/2),0,2*Math.PI);
+        context.moveTo(xm-dxm,ym+dym);
+        context.quadraticCurveTo(xc-dxm, yc+dym,x-dx, y+dy);
+        context.lineTo(x+dx, y-dy);
+        context.quadraticCurveTo(xc+dxm, yc-dym,xm+dxm,ym-dym);
         context.fill();
         context.stroke();
 
@@ -244,7 +271,19 @@ function prepareCanvas()
         context.quadraticCurveTo(xm+dxm, ym-dym,xm1+dxm1,ym1-dym1);
         context.fill();
         context.stroke();
+        
+        context.beginPath();
+        context.arc(xc,yc,(v+vMinus)/2*m/2,0,2*Math.PI);
+        context.fill();
+        context.stroke();
+        
+        context.beginPath();
+        context.arc(x,y,v*m/2,0,2*Math.PI);
+        context.fill();
+        context.stroke();
 
+        
+      
         dxm1 = dxm;
         dym1 = dym;
         dxm = dx;
@@ -265,6 +304,7 @@ function prepareCanvas()
         }
         context.fillStyle = color;
         context.strokeStyle = color;
+
         context.beginPath();
         context.moveTo(xm1-dxm1,ym1+dym1);
         context.quadraticCurveTo(xm-dxm, ym+dym,x-dx, y+dy);
@@ -272,6 +312,7 @@ function prepareCanvas()
         context.quadraticCurveTo(xm+dxm, ym-dym,xm1+dxm1,ym1-dym1);
         context.fill();
         context.stroke();
+
         dxm1 = dxm;
         dym1 = dym;
         dxm = dx;
