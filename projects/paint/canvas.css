@@ -27,8 +27,11 @@ body, div, fieldset, input, label, a, canvas {
 .header-buttons div{
     position: relative;
 }
-.one {
- z-index: 100;
+.z-9 {
+    z-index: 9;
+}
+.z-10 {
+    z-index: 10;
 }
 .header-buttons-h{
     float: left;
@@ -59,9 +62,11 @@ body, div, fieldset, input, label, a, canvas {
 }
 div.header-buttons-h span.checked {
     height: 40px; 
+    border-bottom: 1px solid white;
 }
 div.header-buttons-v span.checked {
     width: 60px; 
+    border-bottom: 1px solid white;
 }
 .header-buttons span.clear, span.brush, span.save, span.undo, span.redo, a  {
     line-height:30px;

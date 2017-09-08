@@ -15,7 +15,6 @@ var paint = (function() {
         canvas = document.getElementById(canvasId);
         canvas.setAttribute('width', canvasWidth);
         canvas.setAttribute('height', canvasHeight);
-        canvas.setAttribute('id', 'canvas');
         context = canvas.getContext("2d");
 
         _setDefault();
@@ -111,6 +110,7 @@ var paint = (function() {
     function saveInUploadFile() {
         var dt = canvas.toDataURL();
         var d = new Date();
+        /* TODO YYYY-MM-DD hh:mm::ss */
         this.download = 'Feeling_Speed_Brush-'+d.getTime()+'.png';
         this.href = dt; 
     }
