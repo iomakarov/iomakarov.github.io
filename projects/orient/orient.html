@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>three.js canvas - geometry - cube</title>
+		<title>three.js</title>
 		
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		
 		<style>
 			body {
 				font-family: Monospace;
@@ -13,7 +14,11 @@
 		</style>
 	</head>
 	<body>
-
+	<div id="container" style="position:absolute; z-index:1;">
+	    <video playsinline="" autoplay=""></video>
+	</div>
+	<div id="canvas" style="position:absolute; z-index:10;">
+	</div>
 		<script src="./orient_files/three.js"></script>
 
 		<script src="./orient_files/Projector.js"></script>
@@ -44,7 +49,7 @@
 			function init() {
 
 				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+				document.getElementById('canvas').appendChild( container );
 
 				/*
 				var info = document.createElement( 'div' );
@@ -81,6 +86,10 @@
 
 				cube = new THREE.Mesh( geometry, material );
 				cube.position.y = -1000;
+				//cube.position.x = -100;
+				cube.rotation.x += 10* Math.PI / 180
+				cube.rotation.y += 10* Math.PI / 180
+				cube.rotation.z += 10* Math.PI / 180
 				scene.add( cube );
 
 				// Plane
@@ -212,5 +221,6 @@
 		</script><div><canvas width="2560" height="1274" style="width: 1280px; height: 637px;"></canvas></div>
 
 	
-
+	<script src="./getUserMedia/adapter-latest.js"></script>
+	<script src="./getUserMedia/main.js" async=""></script>
 </body></html>
