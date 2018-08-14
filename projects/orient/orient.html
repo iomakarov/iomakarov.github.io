@@ -51,15 +51,7 @@
 				container = document.createElement( 'div' );
 				document.getElementById('canvas').appendChild( container );
 
-				/*
-				var info = document.createElement( 'div' );
-				info.style.position = 'absolute';
-				info.style.top = '10px';
-				info.style.width = '100%';
-				info.style.textAlign = 'center';
-				info.innerHTML = 'Drag to spin the cube';
-				container.appendChild( info );
-				*/
+				
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
 				camera.position.y = 0;
 				//camera.position.z = 500;
@@ -70,7 +62,7 @@
 				scene.background = null;
 
 
-				// Cube
+				// Cube 1
 
 				var geometry = new THREE.BoxGeometry( 200, 200, 200 );
 
@@ -91,6 +83,30 @@
 				cube.rotation.y += 10* Math.PI / 180
 				cube.rotation.z += 10* Math.PI / 180
 				scene.add( cube );
+				
+				
+				// Cube 2
+				
+				var geometry = new THREE.BoxGeometry( 200, 200, 200 );
+
+				for ( var i = 0; i < geometry.faces.length; i += 2 ) {
+
+					var hex = Math.random() * 0xffffff;
+					geometry.faces[ i ].color.setHex( hex );
+					geometry.faces[ i + 1 ].color.setHex( hex );
+
+				}
+
+				var material = new THREE.MeshBasicMaterial( { vertexColors: THREE.FaceColors, overdraw: 0.5 } );
+
+				cube = new THREE.Mesh( geometry, material );
+				cube.position.y = -1000;
+				cube.position.x = -300;
+				cube.position.z = 100;
+				cube.rotation.x += 45* Math.PI / 180
+				cube.rotation.y += 45* Math.PI / 180
+				cube.rotation.z += 45* Math.PI / 180
+				scene.add( cube );		
 
 				// Plane
 				/*
