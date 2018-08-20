@@ -3,7 +3,6 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- three.js library -->
 <script src="./mobile-performance_files/three.min.js"></script>
-<script src="./mobile-performance_files/stats.min.js"></script>
 <!-- ar.js -->
 <script src="./mobile-performance_files/ar.js"></script>
 <script>THREEx.ArToolkitContext.baseURL = './'</script>
@@ -153,12 +152,11 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
 	//////////////////////////////////////////////////////////////////////////////////
-	var stats = new Stats();
-	document.body.appendChild( stats.dom );
+
+	
 	// render the scene
 	onRenderFcts.push(function(){
 		renderer.render( scene, camera );
-		stats.update();
 	})
 
 	// run the rendering loop
