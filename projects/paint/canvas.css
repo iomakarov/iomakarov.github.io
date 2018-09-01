@@ -65,8 +65,7 @@ div.header-buttons-h span.checked {
     border-bottom: 1px solid white;
 }
 div.header-buttons-v span.checked {
-    width: 60px; 
-    border-bottom: 1px solid white;
+    width: 60px;
 }
 .header-buttons span.clear, span.brush, span.save, span.undo, span.redo, a  {
     line-height:30px;
