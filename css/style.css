@@ -1,15 +1,16 @@
-h1, h2 {
-    color:#222222;
-}
-img {
-    width:300px;
-    border: 0px;
+body, div, ul, li, a {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    left:0;
+    right: 0;
 }
 div {
     position: relative;
     width:600px;
     left:-300px;
     margin-left: 50%;
+    margin-top:40px;
+    margin-bottom: 60px;
 }
 ul {
     margin-left: 0px;
@@ -29,15 +30,7 @@ ul p {
     font-size: 18px;
     color:#222222;
 }
-hr {
-    margin-left: 0px;
-    width:300px;
-    border-bottom: 0px;
-}
-span {
-    font-size: 10px;
-    color:#222222;
-}
 .open {
     font-weight:bold;
 }
+
