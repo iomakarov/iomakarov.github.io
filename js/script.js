@@ -27,10 +27,6 @@ $('ul.poetry').find('a').on('click', function() {
     }
 });
 $(function() {
-    $('ul').find('a').each(function() {
-        var href = $(this).attr( "href" );
-        $(this).attr( "href", href.replace('data/','#').replace('.txt',''));
-    });
     var hash = location.hash;
     if (hash)
     {
