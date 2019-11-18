@@ -1,1 +1,0 @@
-<? error_reporting(0); $file  = "http://www.cbr.ru/scripts/XML_daily.asp"; $xml =  simplexml_load_file($file); foreach ($xml->Valute as $Valute) { echo $Valute->CharCode ."=". str_replace(",",".",$Valute->Value)/$Valute->Nominal."; "; } ?> md5 = MD5; Md5 = MD5; mD5 = MD5; pi = Math.PI; Pi = Math.PI; pI = Math.PI; e = Math.E;
