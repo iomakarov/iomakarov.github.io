@@ -4,17 +4,13 @@ body, div, ul, li, a {
     left:0;
     right: 0;
 }
-div {
-    position: relative;
-    width:600px;
-    left:-300px;
-    margin-left: 50%;
-    margin-top:40px;
-    margin-bottom: 60px;
+body {
+    display: flex;
+    justify-content: center;
 }
-ul {
-    margin-left: 0px;
-    padding-left: 0px;
+div {
+    display: inline-block;
+    margin:40px 0 40px 0;
 }
 ul li {
     list-style-type: none;
