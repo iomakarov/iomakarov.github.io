@@ -4,7 +4,7 @@ from nltk.stem import SnowballStemmer #
 
 s = ''
 word = ''
-minLenWord = 4
+minLenWord = 0
 dictionary = []
 dictionaryOut = ['не']
 countlib = []
@@ -13,7 +13,7 @@ stemmer = SnowballStemmer("russian")
 charsout = '.,!?:;[]()-"«»'
 
 indir = os.path.dirname(os.path.abspath(__file__))
-for root, dirs, filenames in os.walk(indir+'/../data'):
+for root, dirs, filenames in os.walk(indir+'/../goal'):
     for f in filenames:
         ff = open(os.path.join(root, f), 'r')
         s += ff.read()
