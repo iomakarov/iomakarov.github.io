@@ -10,7 +10,7 @@ dictionaryOut = ['не']
 countlib = []
 index = 0
 stemmer = SnowballStemmer("russian")
-charsout = '.,!?:;[]()-"«»'
+charsout = '.,!?:;[]()-"«»/=1234567890'
 
 indir = os.path.dirname(os.path.abspath(__file__))
 for root, dirs, filenames in os.walk(indir+'/../goal'):
