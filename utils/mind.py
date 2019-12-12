@@ -6,11 +6,12 @@ s = ''
 word = ''
 minLenWord = 0
 dictionary = []
-dictionaryOut = ['не']
+#dictionaryOut = ['не','на', 'в', 'за', 'до', 'по', 'из', 'и', 'под', 'к', 'со']
+dictionaryOut = []
 countlib = []
 index = 0
 stemmer = SnowballStemmer("russian")
-charsout = '.,!?:;[]()-"«»/=1234567890'
+charsout = '.,!?:;[]()-—"«»/=1234567890'
 
 indir = os.path.dirname(os.path.abspath(__file__))
 for root, dirs, filenames in os.walk(indir+'/../goal'):
@@ -20,7 +21,7 @@ for root, dirs, filenames in os.walk(indir+'/../goal'):
 
 s = s.lower()
 for char in charsout:
-    s = s.replace(char, '')
+    s = s.replace(char, ' ')
 
 lst = s.split()
 
@@ -41,16 +42,16 @@ df = pd.DataFrame({
     'count': countlib
 })
 rf = df.sort_values(by=['count'], ascending=False)
-print(rf)
+countAllWords = rf.sum(axis = 0, skipna = True).iloc[1]
 rf.to_csv(indir + '/count.csv')
 
 fout = open(indir + '/count.txt', 'w')
-fout.write('Всего слов: ' + str(len(lst)) + '\n')
+fout.write('Всего слов: ' + str(countAllWords) + '\n')
 fout.write('Разных слов: ' + str(len(dictionary)) + '\n')
+fout.write('Отношение слов: ' + str(len(dictionary)/countAllWords) + '\n')
 
 for index, count in enumerate(countlib):
-    if count > 10:
+    if count >= 2:
         word = dictionary[index]
         fout.write(word + ' ' + str(count) + '\n')
-        #print(word,' ',count)
 fout.close()
