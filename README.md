@@ -2,6 +2,7 @@
 
 ### [Все стихи](https://iomakarov.github.io/)
 
+- [В джазе остыть](https://iomakarov.github.io/data/129.txt)
 - [Дух Солнца](https://iomakarov.github.io/data/128.txt)
 - [Криптолалия](https://iomakarov.github.io/data/119.txt)
 - [Отступя](https://iomakarov.github.io/data/127.txt)
