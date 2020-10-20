@@ -1,31 +1,32 @@
 function ready(fn) {
     document.readyState != 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
 }
-async function show(hash)
+async function show(href)
 {
-    var  
-        num = hash.replace('#',''),
-        data = await fetch("data/"+num+".txt", { method: 'get'}),
+    console.log(href)
+    var
+        data = await fetch(href, { method: 'get'}),
         dataText = await data.text(),
-        a = document.querySelector("ul.poetry a[href='#"+num+"']"),
+        a = document.querySelector("ul.poetry a[href='"+href+"']"),
         pattern = /\r\n|\r|\n/g,
         arr = dataText.split(pattern);
     a.classList.add('open');
     a.scrollIntoView({behavior: 'smooth'});
     arr.splice(0, 2);
     a.insertAdjacentHTML('afterend', '<p>'+ arr.join('<br>')+'<br></p>');
-    //history.pushState(null, null, '/anypath');
+    history.pushState(null, null, href);
 }
 ready(() => {
     document.querySelectorAll("ul.poetry a").forEach(el => {
-        el.addEventListener("click", () => {
+        el.addEventListener("click", (e) => {
             if (el.classList.contains('open')){
                 el.classList.remove('open');
                 el.nextElementSibling.parentNode.removeChild(el.nextElementSibling);
             } else {
                 show(el.getAttribute('href'));
             }
+            e.preventDefault();
         })
     });
-    location.hash ? show(location.hash) : null;
+    location.hash ? show(location.hash.replace('#','')) : null;
 });
