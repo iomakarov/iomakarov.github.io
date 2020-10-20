@@ -14,10 +14,11 @@ async function show(hash)
     a.scrollIntoView({behavior: 'smooth'});
     arr.splice(0, 2);
     a.insertAdjacentHTML('afterend', '<p>'+ arr.join('<br>')+'<br></p>');
+    //history.pushState(null, null, '/anypath');
 }
 ready(() => {
     document.querySelectorAll("ul.poetry a").forEach(el => {
-        el.addEventListener("click", () => { 
+        el.addEventListener("click", () => {
             if (el.classList.contains('open')){
                 el.classList.remove('open');
                 el.nextElementSibling.parentNode.removeChild(el.nextElementSibling);
