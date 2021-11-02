@@ -10,7 +10,8 @@ dictionary = []
 dictionaryOut = []
 countlib = []
 index = 0
-stemmer = SnowballStemmer("russian")
+
+stemmer = SnowballStemmer("russian") #rounding
 charsout = '.,!?:;[]()-—"«»/=1234567890'
 
 indir = os.path.dirname(os.path.abspath(__file__))
