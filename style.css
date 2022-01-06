@@ -29,3 +29,7 @@ ul p {
 .open {
     font-weight:bold;
 }
+
+.censure {
+    display: none;
+}
