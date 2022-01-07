@@ -33,3 +33,15 @@ ul p {
 .censure {
     display: none;
 }
+
+.open-censure {
+    background-color: grey;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
