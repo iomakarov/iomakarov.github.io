@@ -17,11 +17,6 @@ async function show(href)
     history.pushState(null, null, href);
 }
 ready(() => {
-    document.getElementById("openCensure").onclick = function() {
-        document.querySelectorAll("li.censure").forEach(el => {
-            el.classList.remove("censure");
-        });    
-    };
     document.querySelectorAll("ul.poetry a").forEach(el => {
         el.addEventListener("click", (e) => {
             if (el.classList.contains('open')){

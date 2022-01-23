@@ -8,7 +8,7 @@ body {
     display: flex;
     justify-content: center;
 }
-div {
+div.main {
     display: inline-block;
     margin:40px 10px 40px 10px;
     width:600px;
@@ -31,17 +31,10 @@ ul p {
 }
 
 .censure {
-    display: none;
-}
-
-.open-censure {
-    background-color: grey;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    margin-top: 10px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    border: none;
+    color: crimson;
+    font-size: 9px;
+    left:2px;
+    position: relative;  
 }
