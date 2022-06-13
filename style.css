@@ -17,15 +17,24 @@ ul li {
     list-style-type: none;
     font-size: 16px;
 }
-ul a {
-    color:#0a5175;
-    text-decoration: none;
-    font-size: 20px;
-}
+
 ul.coin a {
     color:#333333;
     text-decoration: none;
     font-size: 16px;
+}
+ul.links a {
+    color:#0a5175;
+    text-decoration: none;
+    font-size: 20px;
+}
+ul.poetry a {
+    color:#0a5175;
+    text-decoration: none;
+    font-size: 20px;
+}
+ul.links {
+    margin-bottom: 20px;
 }
 ul.coin {
     margin-bottom: 20px;
